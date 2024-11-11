@@ -7,30 +7,9 @@ import { Time } from "@internationalized/date";
 import { DatePicker } from "@nextui-org/react";
 import { useState, ChangeEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: markerIcon2x,
-    iconUrl: markerIcon,
-    shadowUrl: markerShadow,
-  });
 
-const OpenStreetMap = dynamic(() => import('@/component/OpenStreetMap'), {
-    ssr: false,
-});
-
-const MapClickHandler = ({ setLocation }: { setLocation: (location: { lat: number; lng: number }) => void }) => {
-  useMapEvent("click", (e: L.LeafletMouseEvent) => {
-    setLocation({ lat: e.latlng.lat, lng: e.latlng.lng });
-  });
-  return null;
-};
 
 const Page = () => {
   const { username } = useParams(); // Use useParams hook to access params
@@ -49,7 +28,7 @@ const Page = () => {
       date,
       time: time.toString(),
       location,
-      status:"pending"
+      status: "pending"
     };
 
     const response = await fetch("/api/data/todo", {
@@ -60,7 +39,7 @@ const Page = () => {
       body: JSON.stringify(data),
     });
 
-    
+
     const result = await response.json();
     if (result.success) {
       alert("To-do added successfully!");
@@ -110,17 +89,17 @@ const Page = () => {
               <div>
                 <h1 className="w-full h-14 font-bold text-white text-[34px] ml-8 p-1 drop-shadow-xl">Date</h1>
                 <DatePicker
-  className="bg-white text-sm rounded-full block w-full h-7 ml-8 drop-shadow-xl"
-  onChange={(value: DateValue) => {
-    if ("toDate" in value && typeof value.toDate === "function") {
-      const jsDate = value.toDate("Asia/Bangkok"); 
-      setDate(jsDate);
-    } else if (value.year && value.month && value.day) {
-      const jsDate = new Date(value.year, value.month - 1, value.day); 
-      setDate(jsDate);
-    }
-  }}
-/>
+                  className="bg-white text-sm rounded-full block w-full h-7 ml-8 drop-shadow-xl"
+                  onChange={(value: DateValue) => {
+                    if ("toDate" in value && typeof value.toDate === "function") {
+                      const jsDate = value.toDate("Asia/Bangkok");
+                      setDate(jsDate);
+                    } else if (value.year && value.month && value.day) {
+                      const jsDate = new Date(value.year, value.month - 1, value.day);
+                      setDate(jsDate);
+                    }
+                  }}
+                />
 
               </div>
               <div>
@@ -141,7 +120,7 @@ const Page = () => {
               Confirm your to-do
             </button>
           </div>
-          
+
         </div>
       </div>
     </div>
