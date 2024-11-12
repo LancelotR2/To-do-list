@@ -52,16 +52,16 @@ const Page = () => {
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value);
 
   return (
-    <div className="w-screen min-h-screen flex flex-col items-center bg-[#4B5F7E] pb-20">
-      <div className="bg-[#052C42] w-5/6 h-full border border-black rounded-lg drop-shadow-xl m-20">
+    <div className="w-screen min-h-screen flex flex-col items-center bg-[#4f8ce7] pb-20">
+      <div className="bg-[#144a6a] w-5/6 h-full border border-black rounded-lg drop-shadow-xl m-20">
         <div className="bg-[#81A2D3] w-full rounded-t-lg flex justify-between p-5 ">
-          <h1 className="font-bold text-black text-[44px] drop-shadow-xl">Add your new to-do</h1>
-          <button onClick={() => router.push(`/todolist/${username}`)} className="flex items-center justify-center w-16 h-16 rounded-full bg-red-400 hover:bg-red-600 drop-shadow-xl">
+          <h1 className="font-bold text-white text-[44px] drop-shadow-xl">Add your new to-do</h1>
+          <button onClick={() => router.push(`/todolist/${username}`)} className="ring-2 ring-black/70 flex items-center justify-center w-16 h-16 rounded-full bg-red-400 hover:bg-red-600 drop-shadow-xl">
             <MdCancel size={42} />
           </button>
         </div>
         <div className="flex pb-20">
-          <div className="w-1/2 h-full mt-10 space-y-4">
+          <div className="w-1/2 h-full mt-10 space-y-5">
             <div>
               <h1 className="w-full h-10 font-bold text-white text-[34px] ml-8 m-3 drop-shadow-xl">Title</h1>
               <input
@@ -112,15 +112,16 @@ const Page = () => {
                 />
               </div>
             </div>
-            <button
-              type="button"
-              className="mt-36 text-lg text-white bg-[#6FCD44] hover:bg-green-600 font-bold rounded-full py-2.5 p-2 text-center ml-8 w-5/12 drop-shadow-xl"
-              onClick={handleSubmit}
-            >
-              Confirm your to-do
-            </button>
+            <div className="pt-3 ">
+              <button
+                type="button"
+                className="ring-2 ring-black/70 text-lg text-white bg-[#6FCD44] hover:bg-green-600 font-bold rounded-full py-2.5 p-2 text-center ml-8 w-6/12 drop-shadow-xl"
+                onClick={handleSubmit}
+              >
+                Confirm your to-do
+              </button>
+            </div>
           </div>
-
         </div>
       </div>
     </div>
