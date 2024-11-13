@@ -1,12 +1,11 @@
 'use client';
-import { FaCheck } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
-import { RiAddLargeLine } from "react-icons/ri";
 import { Button } from "@nextui-org/react";
 import { signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
-import { use } from 'react';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
+import { FaCheck } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { RiAddLargeLine } from "react-icons/ri";
 
 interface Todo {
   _id: string;
@@ -107,9 +106,9 @@ export default function Page({ params }: { params: Promise<{ username: string }>
           </Button>
         </div>
         <div className="space-y-6 flex items-stretch justify-between mr-8">
-          <div className="ring-2 ring-black/70 w-28 h-8 bg-[#C5D3E8] m-8 rounded-full text-center font-bold">
-            <h1>Today</h1>
-            </div>
+          <Button onClick={()=> setSelectedDate("")} className="ring-2 ring-black/70 w-28 h-8 bg-[#C5D3E8] m-8 rounded-full text-center font-bold">
+            <h1>All Todos</h1>
+            </Button>
           <input
             type="date"
             value={selectedDate}

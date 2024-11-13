@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import TodoModel from "@/models/Todo";
-import { Types } from "mongoose";  // For ObjectId validation
+import { console } from "inspector";
+import { Types } from "mongoose";
+import { NextResponse } from "next/server";
 
 interface Todo {
   username: string;
@@ -13,24 +14,25 @@ interface Todo {
     lat: number;
     lng: number;
   };
-  status?: string; // Optional status field for creating new todos or updating them
+  status?: string;
 }
 
-// POST request to add a new Todo
 export async function POST(req: Request) {
   try {
     const { username, title, description, date, time, location, status }: Todo = await req.json();
 
     await connectDB();
 
+    const formattedDate = new Date(date).toISOString().split("T")[0];
+
     const newTodo = new TodoModel({
       title,
       username,
       description,
-      date: new Date(date),
+      date: formattedDate, 
       time,
       location,
-      status: status || "pending", // Default status is "pending"
+      status: status || "pending",
     });
 
     await newTodo.save();
@@ -44,7 +46,6 @@ export async function POST(req: Request) {
   }
 }
 
-// GET request to fetch todos by username and optionally by date
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
@@ -59,15 +60,13 @@ export async function GET(req: Request) {
     }
 
     await connectDB();
-
-    let query: any = { username };
-
-    if (date) {
+    const query: any = { username };
+    if (date && date != "") {
       query.date = date;
     }
-
+    console.log(date)
     const todos = await TodoModel.find(query);
-
+    console.log(todos)
     return NextResponse.json({ success: true, todos: todos || [] });
   } catch (error) {
     return NextResponse.json(
