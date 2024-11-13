@@ -5,7 +5,7 @@ interface ITodo extends Document {
   username: string;
   title: string;
   description: string;
-  date: Date;
+  date: string;
   time: string;
   location: {
     lat: number;
@@ -20,7 +20,7 @@ const TodoSchema: Schema = new Schema(
     username: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     time: { type: String, required: true },
     location: {
       lat: { type: Number, required: true },

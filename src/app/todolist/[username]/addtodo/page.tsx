@@ -25,7 +25,7 @@ const Page = () => {
       username,
       title,
       description,
-      date,
+      date:date?.toString(),
       time: time.toString(),
       location,
       status: "pending"
@@ -91,13 +91,9 @@ const Page = () => {
                 <DatePicker
                   className="bg-white text-sm rounded-full block w-full h-7 ml-8 drop-shadow-xl"
                   onChange={(value: DateValue) => {
-                    if ("toDate" in value && typeof value.toDate === "function") {
-                      const jsDate = value.toDate("Asia/Bangkok");
+                      const jsDate = new Date(value.year, value.month - 1, value.day+1);
                       setDate(jsDate);
-                    } else if (value.year && value.month && value.day) {
-                      const jsDate = new Date(value.year, value.month - 1, value.day);
-                      setDate(jsDate);
-                    }
+                    
                   }}
                 />
 

@@ -1,6 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
 import TodoModel from "@/models/Todo";
-import { console } from "inspector";
 import { Types } from "mongoose";
 import { NextResponse } from "next/server";
 
@@ -24,6 +23,7 @@ export async function POST(req: Request) {
     await connectDB();
 
     const formattedDate = new Date(date).toISOString().split("T")[0];
+    console.log(formattedDate)
 
     const newTodo = new TodoModel({
       title,
@@ -61,12 +61,12 @@ export async function GET(req: Request) {
 
     await connectDB();
     const query: any = { username };
-    if (date && date != "") {
+    
+    if (date) {
       query.date = date;
     }
-    console.log(date)
     const todos = await TodoModel.find(query);
-    console.log(todos)
+    
     return NextResponse.json({ success: true, todos: todos || [] });
   } catch (error) {
     return NextResponse.json(
