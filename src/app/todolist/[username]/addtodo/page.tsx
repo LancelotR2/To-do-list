@@ -12,7 +12,7 @@ import { useParams, useRouter } from "next/navigation";
 
 
 const Page = () => {
-  const { username } = useParams(); // Use useParams hook to access params
+  const { username } = useParams();
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const router = useRouter();

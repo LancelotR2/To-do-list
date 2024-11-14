@@ -88,7 +88,7 @@ export async function DELETE(req: Request) {
       );
     }
 
-    // Validate if todoId is a valid ObjectId
+    
     if (!Types.ObjectId.isValid(todoId)) {
       return NextResponse.json(
         { success: false, message: "Invalid Todo ID format" },
